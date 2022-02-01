@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pepperminter - Make your own Hexagon Avatar</title>
+</head>
+<body>
+    <section>
+        <strong>1. Upload A Picture</strong>
+        <br />
+        <input type="file" id="pic_upload" accept="image/*" />
+    </section>
+    <hr />
+    <section>
+        <strong>2. Change the scale and cropping</strong>
+        <br />
+        <svg id="hex_preview"></svg>
+    </section>
+    <hr />
+    <section>
+        <strong>3. Download your new <strike>NFT</strike> hexagon!</strong>
+        <br />
+        <button id="btn_download">Download</button>
+    </section>
+<script>
+(function() {
+    let pic_upload = document.getElementById("pic_upload");
+    let hex_preview = document.getElementById("hex_preview");
+    const EMPTY = "";
+    let picture = EMPTY;
+    function set_upload_picture() {
+        console.log("setting picture");
+        if(picture != EMPTY) {
+            console.log("revoking prev URL");
+            URL.revokeObjectURL(picture);
+        }
+        picture = EMPTY;
+        if(pic_upload.files.length >= 1) {
+            console.log("creating new URL");
+            picture = URL.createObjectURL(pic_upload.files[0]);
+        }
+        hex_preview.innerHTML = `<image href="${picture}" />`;
+    }
+    pic_upload.addEventListener("change", set_upload_picture);
+    console.log("started");
+})();
+</script>
+</body>
+</html>
