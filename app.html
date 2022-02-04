@@ -1,48 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pepperminter - Make your own Hexagon Avatar</title>
+    <title>Pepperminter - Make your own Hexagon Avatar!</title>
+    <style>
+        body {
+            font-family: monospace;
+            color: #460097;
+            background-color: #c18bff;
+        }
+        .alt-color, a {
+            color: #97008e;
+        }
+        summary {
+            cursor: pointer;
+        }
+        .privacy-disclosure {
+            margin-bottom: 1em;
+        }
+        .privacy-disclosure summary {
+            font-size: 1.5em;
+            text-transform: uppercase;
+        }
+        .svg-container {
+            text-align: center;
+        }
+        svg {
+            cursor: grab;
+            width: 30em;
+            height: 30em;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
+    <h1>(replaced with page title)</h1>
     <section>
-        <strong>1. Upload A Picture</strong>
+        (<a href="https://github.com/dougabugg/pepperminter">fork me on GitHub!</a>)
+    </section>
+    <details class="privacy-disclosure">
+        <summary>~~ Privacy Disclosure! ~~</summary>
+        <section>This page collects no cookies (unless they were inserted by our CDN), and does not collect any data on the picture you select.</section>
+        <section>All <strike>NFT minting</strike> hexagon crafting is done in your web browser! Good luck; have fun!</section>
+    </details>
+    <section>
+        <strong>1. Select A Picture!</strong>
         <br />
         <input type="file" id="pic_upload" accept="image/*" />
     </section>
     <hr />
     <section>
-        <strong>2. Change the scale and cropping</strong>
-        <br />
-        <svg id="hex_preview"></svg>
+        <strong>2. Change the scale and cropping!</strong>
+    </section>
+    <section class="svg-container">
+        <svg width="500" height="500" viewBox="0 0 132.29 132.29" id="preview_svg">
+            <clipPath id="clipHexagon">
+                <path transform="scale(.26458)" d="m366.32 451.23c-26.314 15.193-207.42 15.193-233.73-1e-5s-116.87-172.03-116.87-202.42c1e-6 -30.385 90.552-187.23 116.87-202.42 26.314-15.193 207.42-15.193 233.73 1.2e-5 26.314 15.193 116.87 172.03 116.87 202.42s-90.552 187.23-116.87 202.42z"/>
+            </clipPath>
+            <g clip-path="url(#clipHexagon)">
+                <image href="" />
+            </g>
+        </svg>
     </section>
     <hr />
     <section>
-        <strong>3. Download your new <strike>NFT</strike> hexagon!</strong>
+        <strong>3. Customize the look!</strong>
+        <details>
+            <summary>Background color</summary>
+        </details>
+        <details>
+            <summary>Haxagon or Pentagon?</summary>
+        </details>
+    </section>
+    <hr />
+    <section>
+        <strong>3. Download your new <strike>NFT</strike> <span id="shape-name">hexagon</span>!</strong>
         <br />
         <button id="btn_download">Download</button>
     </section>
 <script>
-(function() {
-    let pic_upload = document.getElementById("pic_upload");
-    let hex_preview = document.getElementById("hex_preview");
-    const EMPTY = "";
-    let picture = EMPTY;
-    function set_upload_picture() {
-        console.log("setting picture");
-        if(picture != EMPTY) {
-            console.log("revoking prev URL");
-            URL.revokeObjectURL(picture);
+    (function() {
+        let h1 = document.querySelector("h1");
+        let t = document.title;
+        let i = t.indexOf(" ");
+        let t1 = t.substring(0, i);
+        let t2 = t.substring(i);
+        t = "";
+        for(let i = 0; i < t1.length; i++) {
+            let c = t1.substring(i, i+1);
+            if(i % 2 == 0)
+                t += c
+            else
+                t += `<span class="alt-color">${c}</span>`;
         }
-        picture = EMPTY;
-        if(pic_upload.files.length >= 1) {
-            console.log("creating new URL");
-            picture = URL.createObjectURL(pic_upload.files[0]);
-        }
-        hex_preview.innerHTML = `<image href="${picture}" />`;
-    }
-    pic_upload.addEventListener("change", set_upload_picture);
-    console.log("started");
-})();
+        t += t2;
+        h1.innerHTML = t;
+    })();
 </script>
+<script src="main.js"></script>
 </body>
 </html>
